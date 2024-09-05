@@ -1,0 +1,10 @@
+flask
+flask-cors
+torch
+torchvision
+diffusers
+transformers
+timm
+opencv-python
+numpy
+Pillow
