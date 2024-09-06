@@ -1,3 +1,8 @@
+# Vite
+.vite/
+*.local
+
+
 # Logs
 logs
 *.log
