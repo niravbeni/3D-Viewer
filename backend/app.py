@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import requests
 from transformers import pipeline
@@ -8,8 +8,11 @@ import os
 import base64
 from auth_token import AUTH_TOKEN
 
-app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": ["http://localhost:5173", "http://127.0.0.1:5173"], "methods": ["GET", "POST", "OPTIONS"]}})
+# app = Flask(__name__)
+# CORS(app, resources={r"/*": {"origins": ["http://localhost:5173", "http://127.0.0.1:5173"], "methods": ["GET", "POST", "OPTIONS"]}})
+app = Flask(__name__, static_folder='../frontend/dist')
+CORS(app)
+
 
 # Define endpoints and headers
 SDXL_API_URL = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0"
@@ -78,9 +81,21 @@ def generate():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/', methods=['GET'])
-def home():
-    return "Image and Depth Map Generation Server is running!"
+# @app.route('/', methods=['GET'])
+# def home():
+#     return "Image and Depth Map Generation Server is running!"
+
+# if __name__ == '__main__':
+#     app.run(debug=True, host='0.0.0.0', port=5001)
+
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve(path):
+    if path != "" and os.path.exists(app.static_folder + '/' + path):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder, 'index.html')
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5001)
+    port = int(os.environ.get('PORT', 5001))
+    app.run(host='0.0.0.0', port=port)
