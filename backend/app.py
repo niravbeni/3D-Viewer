@@ -54,11 +54,11 @@ def generate():
     try:
         # Generate image using Stable Diffusion
         image_data = generate_image(prompt)
-        save_image(image_data, "generated_image.png")
+        # save_image(image_data, "generated_image.png")
 
         # Generate depth map using Midas
         depth_map_data = generate_depth_map(image_data)
-        save_image(depth_map_data, "depth_map.png")
+        # save_image(depth_map_data, "depth_map.png")
 
         # Convert image and depth map to base64
         image_file = io.BytesIO(image_data)
