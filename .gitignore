@@ -23,4 +23,19 @@ dist-ssr
 *.sln
 *.sw?
 
+# Virtual Environment
+venv_3_10/
+*.pyc
+__pycache__/
+
+# Environment variables
 .env
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
