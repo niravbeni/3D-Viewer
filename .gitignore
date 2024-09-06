@@ -1,6 +1,8 @@
 # Vite
 .vite/
 *.local
+vite.config.d.ts
+vite.config.js
 
 
 # Logs
@@ -68,3 +70,6 @@ instance/
 
 # React specific
 .eslintcache
+
+# TypeScript
+*.tsbuildinfo
