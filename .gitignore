@@ -7,31 +7,27 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+# Dependencies
+node_modules/
+/backend/venv_3_10/
+
+# Build outputs
+dist/
+dist-ssr/
 *.local
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
-.idea
-.DS_Store
+.idea/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
 
-# Virtual Environment
-venv_3_10/
-*.pyc
-__pycache__/
-
-# Environment variables
-.env
-
 # OS generated files
+.DS_Store
 .DS_Store?
 ._*
 .Spotlight-V100
@@ -39,5 +35,31 @@ __pycache__/
 ehthumbs.db
 Thumbs.db
 
+# Python specific
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
 # Large files
 *.dylib
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Flask specific
+instance/
+.webassets-cache
+
+# React specific
+.eslintcache
