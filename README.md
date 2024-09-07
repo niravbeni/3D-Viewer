@@ -4,61 +4,82 @@
 
 This is a 3D viewer for Stable Diffusion generated images.
 
-**Backend**: A Flask-based API, that links both Stable Diffusion for image generation, and MiDaS for the depth maps.
+### Backend
 
-**Frontend**: A React + Typescipt interface that allows for entering prompts for the image generation, and an expected output that has a simple parallax effect. A debug toggle is also included to display the respectvie genertaed image and its correspondind depth map.
+A Flask-based API that links both Stable Diffusion for image generation and MiDaS for depth maps.
 
-React Three Fiber was used for the WebGL depth effect.
+- **Flask**: Python-backed web framework for backend API
+- **MiDaS** (from Hugging Face Transformers): Pre-trained depth estimation model
+- **Stable Diffusion XL** (Hugging Face API): Text-to-image model
+- **Gunicorn**: WSGI HTTP server for production
+
+### Frontend
+
+A React + TypeScript interface that allows for entering prompts for image generation, with an expected output that has a simple parallax effect. A debug toggle is also included to display the respective generated image and depth map.
+
+- **Vite**: Build tool for the frontend
+- **React / TypeScript / Styled Components**: For the user interface design
+- **Three.js / React Three Fiber / Drei**: For the 3D depth effect
+
+### Deployment
+
+- **Render**: Cloud platform for the production build
 
 ## How to Use
 
-- Enter a prompt into the text box
-- Click "Generate"
-- Mouseover the generated output with parallax effect
-- Click and drag to reposition image
-- Optional Debug checkbox toggles the input image and depth map
+1. Enter a prompt in the input field (e.g. "Man riding a dinosaur").
+2. Click "Generate" to create the output.
+3. Mouseover the generated output to see the parallax effect.
+4. Click and drag to reposition the image.
+5. Optional: Use the Debug checkbox to toggle the original generated image and depth map.
 
 ## Link to Deployed App
 
-https://threed-viewer-309u.onrender.com
+[https://threed-viewer-309u.onrender.com](https://threed-viewer-309u.onrender.com)
 
-## How to Run Locally
+## Setup & Installation
 
-1.  Setup a virtual enviroment with Python 3.10, Node.js and npm.
+1.  Clone the repo:
 
-        python -m venv venv
+        git clone https://github.com/niravbeni/3D-Viewer.git
+        cd 3d-image-viewer
 
-        source venv/bin/activate
-
-2.  Install all requirements
+2.  Setup the backend:
 
         cd backend
-
+        python -m venv venv
+        source venv/bin/activate # On Windows use `venv\Scripts\activate`
         pip install -r requirements.txt
 
-3.  Create an .env file for your [Hugging Face](https://huggingface.co/settings/profile) Auth Token in the backend folder.
+3.  Create an .env file in backend directory with for your [Hugging Face](https://huggingface.co/settings/profile) Auth Token:
 
-        AUTH_TOKEN= *******************
+        AUTH_TOKEN=your_huggingface_auth_token
 
-4.  Create the following .env file for the frontend folder
+4.  Setup the frontend:
 
-        VITE_API_URL=http://localhost:5001`
+        cd ../frontend
+        npm install
 
 5.  Run the backend
 
-        cd backend
-
+        cd ../backend
         python app.py
 
 6.  Run the frontend
 
         cd frontend
-
         npm run dev
 
-I now need a breakdown of my entire project for my readme file, explaining my app, the pipeline, the tools used (midas, stable difussion, huggin face, flask, react three fiber, drei etc) for backend and frontend. how it was deployed as well (render). Explain how to use the app, and what is expected to appear (mouse depth effect etc). also how to run the app locally, with setup etc.
+## Future Improvements
 
-this will serve as the document outlining the solution’s design, technology used and any limitations/future improvements.
+1. Develop a more appealing and intuitive user interface.
+2. Implement a history feature to store and display previously generated outputs.
+3. Add save, export, and sharing functionality.
+4. Develop more experimental or advanced visualizations for the output image.
+5. Use more optimized or lighter ML models.
+6. Develop a mobile version of the app.
 
-Some future improvements i figure out so far, is a ebtter looking ui, a hisotry of previously generated outputs, and a way to access history and a way to save out the images easier. Also, a more experimental and fun looking output instead of just a simple depth mouse effect. and maybe incorporating three verrtex depth as well with parallax affect.
-maybe a lighter model for quickloading?
+## Limitations
+
+1. Processing time is slow due to deployment instance and model sizes.
+2. Fluctuations in generated image quality.
