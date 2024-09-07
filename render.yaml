@@ -16,6 +16,8 @@ services:
         value: 3.10.0
       - key: VITE_API_URL
         value: https://threed-viewer-309u.onrender.com
+      - key: RENDER
+        value: true
     healthCheckPath: /
     buildFilter:
       paths:
