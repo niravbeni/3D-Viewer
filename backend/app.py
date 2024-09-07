@@ -42,7 +42,7 @@ headers = {"Authorization": f"Bearer {AUTH_TOKEN}"}
 
 # Initialize Midas for depth estimation
 try:
-    midas_pipeline = pipeline(task="depth-estimation", model="Intel/dpt-large")
+    midas_pipeline = pipeline(task="depth-estimation", model="Intel/dpt-hybrid-midas")
 except Exception as e:
     logger.error(f"Failed to initialize Midas pipeline: {e}")
     midas_pipeline = None
