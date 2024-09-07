@@ -3,6 +3,7 @@ import logging
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import requests
+import transformers
 from transformers import pipeline
 from PIL import Image
 import io
@@ -15,6 +16,8 @@ load_dotenv()
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+transformers.logging.set_verbosity_debug()
 
 # Determine if we're running on Render
 ON_RENDER = os.environ.get('RENDER', '').lower() == 'true'
