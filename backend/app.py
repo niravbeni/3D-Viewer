@@ -12,10 +12,17 @@ from auth_token import AUTH_TOKEN
 ON_RENDER = os.environ.get('RENDER', False)
 
 # Set the static folder path
+# if ON_RENDER:
+#     static_folder = '../frontend/dist'
+# else:
+#     static_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'frontend', 'dist'))
+
 if ON_RENDER:
-    static_folder = '../frontend/dist'
+    static_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'frontend', 'dist'))
 else:
     static_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'frontend', 'dist'))
+
+
 
 app = Flask(__name__, static_folder=static_folder, static_url_path='')
 

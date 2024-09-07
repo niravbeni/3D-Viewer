@@ -22,6 +22,8 @@ import { GeneratedImages } from "./ImageGenerator.types";
 import LinearLoadingBar from "../LinearLoadingBar/LinearLoadingBar";
 
 const ImageGenerator: FC = () => {
+  console.log("API_URL:", API_URL);
+
   const [prompt, setPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
