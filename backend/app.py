@@ -77,8 +77,11 @@ def generate():
     if not prompt:
         return jsonify({'error': 'No prompt provided'}), 400
     try:
+        logger.info(f"Generating image with prompt: {prompt}")
         image_data = generate_image(prompt)
+        logger.info("Image generated")
         depth_map_data = generate_depth_map(image_data)
+        logger.info("Depth map generated")
         
         image_str = base64.b64encode(image_data).decode()
         depth_map_str = base64.b64encode(depth_map_data).decode()
