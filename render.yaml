@@ -10,15 +10,16 @@ services:
       # Install backend dependencies
       cd ../backend
       pip install -r requirements.txt
-    startCommand: cd backend && gunicorn app:app
+    startCommand: cd backend && gunicorn --config gunicorn.conf.py app:app
     envVars:
       - key: PYTHON_VERSION
         value: 3.10.0
       - key: VITE_API_URL
         value: https://threed-viewer-309u.onrender.com
       - key: RENDER
-        value: true
-    healthCheckPath: /
+        value: 'true'
+      value:
+    healthCheckPath: /health
     buildFilter:
       paths:
         - frontend/**
