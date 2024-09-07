@@ -49,7 +49,9 @@ except Exception as e:
 
 def generate_image(prompt):
     try:
-        response = requests.post(SDXL_API_URL, headers=headers, json={"inputs": prompt}, timeout=30)
+        logger.info("Generating image")
+        response = requests.post(SDXL_API_URL, headers=headers, json={"inputs": prompt}, timeout=120)
+        logger.info(f"Response status code: {response.status_code}")
         response.raise_for_status()
         return response.content
     except requests.RequestException as e:
@@ -60,11 +62,17 @@ def generate_depth_map(image_data):
     if midas_pipeline is None:
         raise ValueError("Midas pipeline is not initialized")
     try:
+        logger.info("Generating depth map")
         image = Image.open(io.BytesIO(image_data))
+        logger.info("Image opened")
         result = midas_pipeline(image)
+        logger.info("Depth map generated")
         depth_map = result['depth']
+        logger.info("Depth map extracted")
         buffered = io.BytesIO()
+        logger.info("Saving depth map")
         depth_map.save(buffered, format="PNG")
+        logger.info("Depth map saved")
         return buffered.getvalue()
     except Exception as e:
         logger.error(f"Error generating depth map: {e}")
