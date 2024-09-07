@@ -17,7 +17,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Determine if we're running on Render
-ON_RENDER = os.environ.get('RENDER', 'false').lower() == 'true'
+ON_RENDER = os.environ.get('RENDER', '').lower() == 'true'
 
 # Set the static folder path
 static_folder = '../frontend/dist' if ON_RENDER else os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'frontend', 'dist'))
