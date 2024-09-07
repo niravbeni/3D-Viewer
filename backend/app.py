@@ -65,6 +65,7 @@ def generate_depth_map(image_data):
         logger.info("Generating depth map")
         image = Image.open(io.BytesIO(image_data))
         logger.info("Image opened")
+        logger.info(image)
         result = midas_pipeline(image)
         logger.info("Depth map generated")
         depth_map = result['depth']
